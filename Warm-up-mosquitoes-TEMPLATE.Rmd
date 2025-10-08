@@ -1,0 +1,46 @@
+## Fill in second analysis/plot
+```{r second-analysis-or-plot, include=TRUE, eval=TRUE, warning=FALSE, fig.align='left', fig.width=4.75, fig.height=7}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+hm <- counts_matrix %>%
+  filter(!is.na(long), !is.na(lat)) %>%
+  transmute(
+    long, lat,
+    `WNV-positive pools (rate)` = loc_rate,
+    `House finch blood meals`   = host_House_finch
+  ) %>%
+  pivot_longer(-c(long, lat), names_to = "metric", values_to = "value") %>%
+  mutate(value = ifelse(is.na(value), 0, value))
+
+# plot extent (a small pad around data)
+xpad <- diff(range(hm$long))*0.05
+ypad <- diff(range(hm$lat))*0.05
+xlim <- range(hm$long) + c(-xpad, xpad)
+ylim <- range(hm$lat) + c(-ypad, ypad)
+
+ggplot(hm, aes(long, lat)) +
+  borders("state", regions = "utah", colour = "grey75", fill = NA) +
+  # KDE hotspot, weighted by value
+  stat_density_2d_filled(
+    # CORRECTED LINE: Use the continuous 'nlevel' instead of the discrete 'level'
+    aes(weight = value, fill = after_stat(nlevel)),
+    contour_var = "ndensity", geom = "polygon",
+    bins = 12, alpha = 0.9, adjust = 0.8
+  ) +
+  # optional faint contours
+  stat_density_2d(
+    aes(weight = value, color = after_stat(level)),
+    contour_var = "ndensity", bins = 12, linewidth = 0.15, show.legend = FALSE
+  ) +
+  # show sites lightly on top
+  geom_point(aes(size = pmax(value, 0.0001)), alpha = 0.5, shape = 21, stroke = 0.2,
+             fill = NA, color = "grey30", show.legend = FALSE) +
+  coord_quickmap(xlim = xlim, ylim = ylim) +
+  facet_wrap(~ metric, nrow = 1) +
+  # This continuous scale will now work correctly with 'nlevel'
+  scale_fill_viridis_c(option = "C", direction = -1, name = "Hotspot") +
+  guides(color = "none") +
+  theme_minimal() +
+  labs(x = NULL, y = NULL)
