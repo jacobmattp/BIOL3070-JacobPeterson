@@ -15,8 +15,6 @@ Jacob Peterson
   - [Fill in 2nd analysis/plot e.g. generalized linear
     model](#fill-in-2nd-analysisplot-eg-generalized-linear-model)
 - [DISCUSSION](#discussion)
-  - [Interpretation of 1st analysis
-    (e.g. barplots)](#interpretation-of-1st-analysis-eg-barplots)
   - [Interpretation of 2nd analysis (e.g. generalized linear
     model)](#interpretation-of-2nd-analysis-eg-generalized-linear-model)
 - [REFERENCES](#references)
@@ -305,35 +303,34 @@ linear regression model. The prevalence of WNV in this species appears
 to be directly proportional to its high population density in the study
 region. This correlation suggests that WNV infection rates among local
 bird species are largely a function of their relative abundance, rather
-than a species-specific susceptibility.
-
-## Interpretation of 1st analysis (e.g. barplots)
-
-House finches were both the most common birds and most common carrier of
-WNV. This supports our hypothesis.
+than a species-specific susceptibility. Our findings clearly strongly
+point towards the house finch as a reservoir for WNV. What our study
+lacks is causation as we have only determined correlation. Furthermore,
+our study is limited in scope sticking only to the Salt Lake City
+region. A further study could examine larger regions. \## Interpretation
+of 1st analysis (e.g. barplots) House finches were both the most common
+birds and most common carrier of WNV. This supports our hypothesis.
 
 ## Interpretation of 2nd analysis (e.g. generalized linear model)
 
 The generalized linear models quantify the relationship suggested by the
 bar plots, confirming that the association between House Finches and
-West Nile Virus is statistically significant. Two separate models were
-run to test this relationship:
+West Nile Virus is statistically significant. Two models were run to
+test this relationship:
 
-Predicting WNV Presence/Absence (glm1): This first model (a logistic
-regression) tested whether the number of House Finch bloodmeals could
-predict if a location was WNV-positive or negative. The results show a
-positive and statistically significant relationship (coefficient =
-0.3468, p-value = 0.0287). This means that as the number of House Finch
-bloodmeals increases, the probability of a site testing positive for WNV
-also significantly increases.
+Predicting WNV Presence/Absence. This first model tested whether the
+number of House Finch bloodmeals could predict if a location was
+WNV-positive or negative. The results show a positive and statistically
+significant relationship (coefficient = 0.3468, p-value = 0.0287). As
+the number of house finch blood meals increase, the probability of
+testing positive for WNV increases.
 
-Predicting WNV Infection Rate (glm2): The second model tested if the
-number of House Finch bloodmeals could predict the actual infection rate
-(loc_rate) at a site. This model also found a positive and highly
-statistically significant relationship (coefficient = 0.027479, p-value
-= 4.54e-05). This result indicates that for every additional House Finch
-bloodmeal found, the WNV infection rate is predicted to rise by
-approximately 0.027. \# CONCLUSION
+Predicting WNV Infection Rate. The second model tested if the number of
+House Finch bloodmeals could predict the actual infection rate at a
+site. This model also found a positive and highly statistically
+significant relationship (coefficient = 0.027479, p-value = 4.54e-05).
+For every additional house finch bloodmeal found, the WNV infection rate
+will rise approximately 0.027 \# CONCLUSION
 
 The evidence from this study strongly supports our initial hypothesis.
 The house finch is the most common carrier for West Nile Virus in the
