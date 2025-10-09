@@ -10,13 +10,14 @@ Jacob Peterson
   - [Hypothesis](#hypothesis)
   - [Prediction](#prediction)
 - [METHODS](#methods)
-  - [Fill in 1st analysis
-    e.g. barplots](#fill-in-1st-analysis-eg-barplots)
-  - [Fill in 2nd analysis/plot e.g. generalized linear
-    model](#fill-in-2nd-analysisplot-eg-generalized-linear-model)
+  - [Analysis of barplots](#analysis-of-barplots)
+  - [Analysis of GLM](#analysis-of-glm)
 - [DISCUSSION](#discussion)
+  - [Interpretation of 1st analysis
+    (e.g. barplots)](#interpretation-of-1st-analysis-eg-barplots)
   - [Interpretation of 2nd analysis (e.g. generalized linear
     model)](#interpretation-of-2nd-analysis-eg-generalized-linear-model)
+- [CONCLUSION](#conclusion)
 - [REFERENCES](#references)
 
 # ABSTRACT
@@ -107,7 +108,7 @@ MINion device. Sequenced DNA were ran through the BLAST database to
 identify carriers. Code was created with the help of Dr Saarman and
 ChatGPT.
 
-## Fill in 1st analysis e.g. barplots
+## Analysis of barplots
 
 We compared number of blood meals from each species between two sites.
 Sites that had one or more positive WNV and no positive WNV. A grouped
@@ -215,7 +216,7 @@ par(op)
 host_species_colors <- species_colors
 ```
 
-## Fill in 2nd analysis/plot e.g. generalized linear model
+## Analysis of GLM
 
 While the visual comparison offered by barplots provides an intuitive
 initial assessment, moving from visual suggestion to a scientific
@@ -307,9 +308,12 @@ than a species-specific susceptibility. Our findings clearly strongly
 point towards the house finch as a reservoir for WNV. What our study
 lacks is causation as we have only determined correlation. Furthermore,
 our study is limited in scope sticking only to the Salt Lake City
-region. A further study could examine larger regions. \## Interpretation
-of 1st analysis (e.g. barplots) House finches were both the most common
-birds and most common carrier of WNV. This supports our hypothesis.
+region. A further study could examine larger regions.
+
+## Interpretation of 1st analysis (e.g. barplots)
+
+House finches were both the most common birds and most common carrier of
+WNV. This supports our hypothesis.
 
 ## Interpretation of 2nd analysis (e.g. generalized linear model)
 
@@ -330,7 +334,9 @@ House Finch bloodmeals could predict the actual infection rate at a
 site. This model also found a positive and highly statistically
 significant relationship (coefficient = 0.027479, p-value = 4.54e-05).
 For every additional house finch bloodmeal found, the WNV infection rate
-will rise approximately 0.027 \# CONCLUSION
+will rise approximately 0.027
+
+# CONCLUSION
 
 The evidence from this study strongly supports our initial hypothesis.
 The house finch is the most common carrier for West Nile Virus in the
@@ -349,4 +355,4 @@ transmission risk in this urban ecosystem.
 2.  ChatGPT. OpenAI, version Jan 2025. Used as a reference for functions
     such as plot() and to correct syntax errors. Accessed 2025-10-09.
 
-3.  3.  <https://www.cdc.gov/west-nile-virus/about/index.html>
+3.  <https://www.cdc.gov/west-nile-virus/about/index.html>

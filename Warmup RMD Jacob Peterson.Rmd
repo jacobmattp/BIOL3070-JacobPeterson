@@ -83,7 +83,7 @@ Gravid and CO2 traps were placed across Salt Lake City UT. Samples were collecte
 DNA samples were processed using the MINion device. Sequenced DNA were ran through the BLAST database
 to identify carriers. Code was created with the help of Dr Saarman and ChatGPT.
 
-## Fill in 1st analysis e.g. barplots
+## Analysis of barplots
 
 We compared number of blood meals from each species between two sites. Sites that had one or more positive WNV and no positive WNV. A grouped barplot is the best choice because it visually compares the numerical counts of blood meals across two separate categorical groups: the host species and the WNV site status. This side by side clustering makes it immediately clear whether any specific host species is fed upon significantly more frequently at WNV-Positive sites than at WNV-Negative sites. The method is superior for this data because it allows for direct magnitude comparison between the two critical disease environments.
 
@@ -178,7 +178,7 @@ par(op)
 ## Keep the colors mapping for reuse elsewhere
 host_species_colors <- species_colors
 ```
-## Fill in 2nd analysis/plot e.g. generalized linear model
+## Analysis of GLM
 
   While the visual comparison offered by barplots provides an intuitive initial assessment, moving from visual suggestion to a scientific conclusion requires formal statistical rigor. To quantify the hypothesized role of the House Finch in the West Nile Virus (WNV) cycle, we employed regression analysis to test its predictive power against key measures of viral activity. The core of this analysis focused on whether the presence or increasing count of House Finch blood meals could reliably predict two distinct WNV outcomes: first, the binary determination of whether a site registered as WNV-positive; and second, the numeric measure of the overall WNV positivity rate observed at that site.
 
@@ -203,6 +203,7 @@ Our analysis identifies Haemorhous mexicanus as the primary avian reservoir for 
 Our findings clearly strongly point towards the house finch as a reservoir for WNV. What our study
 lacks is causation as we have only determined correlation. Furthermore, our study is limited in scope
 sticking only to the Salt Lake City region. A further study could examine larger regions. 
+
 ## Interpretation of 1st analysis (e.g. barplots)
 House finches were both the most common birds and most common carrier of WNV. This supports our
 hypothesis. 
@@ -214,6 +215,7 @@ The generalized linear models quantify the relationship suggested by the bar plo
 Predicting WNV Presence/Absence. This first model tested whether the number of House Finch bloodmeals could predict if a location was WNV-positive or negative. The results show a positive and statistically significant relationship (coefficient = 0.3468, p-value = 0.0287). As the number of house finch blood meals increase, the probability of testing positive for WNV increases. 
 
 Predicting WNV Infection Rate. The second model tested if the number of House Finch bloodmeals could predict the actual infection rate at a site. This model also found a positive and highly statistically significant relationship (coefficient = 0.027479, p-value = 4.54e-05). For every additional house finch bloodmeal found, the WNV infection rate will rise approximately 0.027
+
 # CONCLUSION
 
 The evidence from this study strongly supports our initial hypothesis. The house finch is the 
@@ -225,7 +227,7 @@ most common carrier for West Nile Virus in the Salt Lake City area. This was dem
 
 2. ChatGPT. OpenAI, version Jan 2025. Used as a reference for functions such as plot() and to correct syntax errors. Accessed `r Sys.Date()`.
 
-3. 3.  https://www.cdc.gov/west-nile-virus/about/index.html
+3.  https://www.cdc.gov/west-nile-virus/about/index.html
 
 
 
