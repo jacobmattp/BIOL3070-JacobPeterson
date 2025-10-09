@@ -24,13 +24,16 @@ Jacob Peterson
 
 # ABSTRACT
 
-This study examines carriers of West Nile Virus. We hypothesized that
-the most common birds will be the most common carriers. In this case,
-around Salt Lake City Utah, the house finch Haemorhous mexicanus is the
-most common bird. Therefore the finch will be the most common carrier.
-Our data supports our hypothesis with the house finch being the species
-with the most amount of positive bloodmeal tests from captured
-mosquitos.
+West Nile Virus infects hundreds of Americans per year, causing death in
+extreme cases. Controlling this virus allows us to implement prevention
+methods that are easily transferrable to other areas of the world where
+the virus is severe. This study examines carriers of West Nile Virus. We
+hypothesized that the most common birds will be the most common
+carriers. In this case, around Salt Lake City Utah, the house finch
+Haemorhous mexicanus is the most common bird. Therefore the finch will
+be the most common carrier. Our data supports our hypothesis with the
+house finch being the species with the most amount of positive bloodmeal
+tests from captured mosquitos.
 
 # BACKGROUND
 
@@ -80,7 +83,7 @@ arrows(duration$lo, bp, duration$hi, bp,
        angle=90, code=3, length=0.05, col="black", xpd=TRUE)
 ```
 
-<img src="Warm-up-mosquitoes-TEMPLATE_files/figure-gfm/viremia-1.png" style="display: block; margin: auto auto auto 0;" />
+<img src="Warmup-RMD-Jacob-Peterson_files/figure-gfm/viremia-1.png" style="display: block; margin: auto auto auto 0;" />
 
 # STUDY QUESTION and HYPOTHESIS
 
@@ -206,7 +209,7 @@ barplot(height = counts1,
         xlim = xlim_use)
 ```
 
-![](Warm-up-mosquitoes-TEMPLATE_files/figure-gfm/first-analysis-1.png)<!-- -->
+![](Warmup-RMD-Jacob-Peterson_files/figure-gfm/first-analysis-1.png)<!-- -->
 
 ``` r
 par(op)
