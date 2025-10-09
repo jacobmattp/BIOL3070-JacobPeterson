@@ -218,25 +218,22 @@ host_species_colors <- species_colors
 
 ## Analysis of GLM
 
-While the visual comparison offered by barplots provides an intuitive
-initial assessment, moving from visual suggestion to a scientific
-conclusion requires formal statistical rigor. To quantify the
-hypothesized role of the House Finch in the West Nile Virus (WNV) cycle,
-we employed regression analysis to test its predictive power against key
-measures of viral activity. The core of this analysis focused on whether
-the presence or increasing count of House Finch blood meals could
-reliably predict two distinct WNV outcomes: first, the binary
-determination of whether a site registered as WNV-positive; and second,
-the numeric measure of the overall WNV positivity rate observed at that
-site.
+To quantify the hypothesized role of the House Finch in the West Nile
+Virus cycle, we employed regression analysis to test its predictive
+power against key measures of viral activity. The core of this analysis
+focused on whether the presence or increasing count of House Finch blood
+meals could reliably predict two distinct WNV outcomes: first, the
+binary determination of whether a site registered as WNV-positive; and
+second, the numeric measure of the overall WNV positivity rate observed
+at that site.
 
 This statistical test served the vital function of formally evaluating
 the relationship that was qualitatively suggested by the barplots. By
 generating objective coefficients and p-values, the analysis allowed us
-to rigorously confirm the strength and direction of the association,
-thereby transforming the observed differences in feeding frequency into
-a statistically validated measure of the House Finch’s contribution to
-WNV transmission risk.
+to confirm the strength and direction of the association, thereby
+transforming the observed differences in feeding frequency into a
+statistically validated measure of the House Finch’s contribution to WNV
+transmission risk.
 
 ``` r
 # second-analysis-or-plot, glm with house finch alone against binary +/_
