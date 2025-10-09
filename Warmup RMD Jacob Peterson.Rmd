@@ -200,18 +200,24 @@ summary(glm2)
 
 # DISCUSSION
 Our analysis identifies Haemorhous mexicanus as the primary avian reservoir for West Nile Virus within the Salt Lake City metropolitan area. This conclusion is strongly supported by multiple data visualizations; bar plot analysis indicates that House Finches account for the highest number of WNV cases, a finding corroborated by our linear regression model. The prevalence of WNV in this species appears to be directly proportional to its high population density in the study region. This correlation suggests that WNV infection rates among local bird species are largely a function of their relative abundance, rather than a species-specific susceptibility. 
-
+Our findings clearly strongly point towards the house finch as a reservoir for WNV. What our study
+lacks is causation as we have only determined correlation. Furthermore, our study is limited in scope
+sticking only to the Salt Lake City region. A further study could examine larger regions. 
 ## Interpretation of 1st analysis (e.g. barplots)
-
-The first analysis... fill in here what it was, the summary of the results, and your interpretation. 
+House finches were both the most common birds and most common carrier of WNV. This supports our
+hypothesis. 
 
 ## Interpretation of 2nd analysis (e.g. generalized linear model)
 
-The second analysis... fill in here what it was, the summary of the results, and your interpretation.
+The generalized linear models quantify the relationship suggested by the bar plots, confirming that the association between House Finches and West Nile Virus is statistically significant. Two models were run to test this relationship:
 
+Predicting WNV Presence/Absence. This first model tested whether the number of House Finch bloodmeals could predict if a location was WNV-positive or negative. The results show a positive and statistically significant relationship (coefficient = 0.3468, p-value = 0.0287). As the number of house finch blood meals increase, the probability of testing positive for WNV increases. 
+
+Predicting WNV Infection Rate. The second model tested if the number of House Finch bloodmeals could predict the actual infection rate at a site. This model also found a positive and highly statistically significant relationship (coefficient = 0.027479, p-value = 4.54e-05). For every additional house finch bloodmeal found, the WNV infection rate will rise approximately 0.027
 # CONCLUSION
 
-Fill in here... State the overall answer to your research question, based on all analyses. Mention whether the evidence supports your hypothesis and what it suggests about WNV amplification in Salt Lake City.
+The evidence from this study strongly supports our initial hypothesis. The house finch is the 
+most common carrier for West Nile Virus in the Salt Lake City area. This was demonstrated via a statistical test and analysis of the data. These findings suggest that the high population density of House Finches is a key factor driving WNV amplification and transmission risk in this urban ecosystem.
 
 # REFERENCES     
 
