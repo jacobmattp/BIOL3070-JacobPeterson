@@ -1,0 +1,94 @@
+---
+title: "COPD Prevalence Map"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Setup
+```{r setup, include=FALSE}
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(viridis)
+library(usmap)
+```{r}
+data_text <- "
+StatePercentCountPercentCountPercentCount
+Alabama8.6161,90010.1207,5009.4369,400
+Alaska5.315,3006.116,1005.731,400
+Arizona5.0137,8006.4180,7005.7318,500
+Arkansas8.697,60010.5125,6009.6223,200
+California4.5680,6004.7733,1004.61,413,800
+Colorado4.398,9005.9135,1005.1233,900
+Connecticut4.765,4005.987,2005.3152,500
+Delaware5.922,4006.627,3006.249,700
+District of Columbia4.110,6005.115,1004.625,700
+Florida (2020)6.8574,6008.2745,5007.51,320,100
+Kentucky9.8166,80012.0214,90010.9381,700
+West Virginia11.882,30014.4103,90013.1186,200
+United States5.56,800,4006.88,875,1006.215,587,000
+"
+```{r}
+# 1. Split the single string into a vector of individual lines
+lines <- str_split(data_text, "\n")[[1]]
+
+# 2. Clean up lines: remove whitespace and empty lines
+lines <- trimws(lines)
+lines <- lines[lines != ""]
+
+lines <- lines[-1]
+
+
+pattern <- "^([A-Za-z .()0-9]+)(\\d+\\.\\d)([\\d,]+)(\\d+\\.\\d)([\\d,]+)(\\d+\\.\\d)([\\d,]+)$"
+
+# 4. Apply str_match to EACH line
+rows <- str_match(lines, pattern)
+
+# 5. Remove any lines that didn't match
+rows <- rows[!is.na(rows[,1]), ]
+
+# 6. Create the data frame
+df <- as.data.frame(rows[,2:8])
+colnames(df) <- c("State","Percent_Female","Count_Female","Percent_Male","Count_Male","Percent_Total","Count_Total")
+
+df <- df %>%
+  filter(State != "United States") %>%
+  mutate(across(starts_with("Percent"), as.numeric),
+         # 7. Use str_replace_all to remove ALL commas
+         across(starts_with("Count"), ~ as.numeric(str_replace_all(.x, ",", ""))),
+         State = str_replace(State, "\\s*\\(.*\\)", ""), # Removes text in parentheses
+         State = str_trim(State))
+
+# Check the result
+print(df)
+
+```{r}
+heatmap_data <- df %>%
+  select(State, Percent_Female, Percent_Male, Percent_Total) %>%
+  pivot_longer(cols = starts_with("Percent_"),
+               names_to = "Group",
+               values_to = "Percent") %>%
+  mutate(Group = str_replace(Group, "Percent_", "")) %>%
+  rename(state = State) # <-- THIS IS THE FIX
+
+# Check the result
+print(head(heatmap_data))
+
+```{r}
+# Generate the map using YOUR data
+plot_usmap(
+  data = heatmap_data, 
+  values = "Percent",
+  regions = "states"
+) +
+  scale_fill_viridis_c(name = "Percent") +
+  facet_wrap(~ Group) + # This creates the two maps for Male/Female
+  labs(title = "COPD Prevalence by U.S. State and Gender") +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+    strip.text = element_text(size = 14, face = "bold")
+  )

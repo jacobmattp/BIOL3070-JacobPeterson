@@ -1,0 +1,84 @@
+Final rmd report
+================
+Jacob Peterson
+10/8/2025
+
+- [ABSTRACT](#abstract)
+- [BACKGROUND](#background)
+- [STUDY QUESTION and HYPOTHESIS](#study-question-and-hypothesis)
+  - [Questions](#questions)
+  - [Hypothesis](#hypothesis)
+  - [Prediction](#prediction)
+- [METHODS](#methods)
+  - [Fill in 1st analysis
+    e.g. barplots](#fill-in-1st-analysis-eg-barplots)
+  - [Fill in 2nd analysis/plot e.g. generalized linear
+    model](#fill-in-2nd-analysisplot-eg-generalized-linear-model)
+- [DISCUSSION](#discussion)
+  - [Interpretation of 1st analysis
+    (e.g. barplots)](#interpretation-of-1st-analysis-eg-barplots)
+  - [Interpretation of 2nd analysis (e.g. generalized linear
+    model)](#interpretation-of-2nd-analysis-eg-generalized-linear-model)
+- [CONCLUSION](#conclusion)
+- [REFERENCES](#references)
+
+# ABSTRACT
+
+
+
+
+# BACKGROUND
+
+
+
+``` r
+
+
+# STUDY QUESTION and HYPOTHESIS
+
+## Questions
+
+
+
+## Prediction
+
+
+
+# METHODS
+
+
+## Fill in 1st analysis e.g. barplots
+
+
+
+``` r
+
+``` r
+par(op)
+
+## Keep the colors mapping for reuse elsewhere
+host_species_colors <- species_colors
+```
+
+## Fill in 2nd analysis/plot e.g. generalized linear model
+
+
+
+# DISCUSSION
+
+
+
+## Interpretation of 1st analysis (e.g. barplots)
+
+
+
+## Interpretation of 2nd analysis (e.g. generalized linear model)
+
+
+# CONCLUSION
+
+
+
+# REFERENCES
+
+
