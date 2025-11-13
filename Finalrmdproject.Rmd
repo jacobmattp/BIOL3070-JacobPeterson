@@ -50,14 +50,9 @@ With this information in mind, we have posed the following question: “Do areas
 
 
 # METHODS
----
-title: "COPD Prevalence Map"
-author: "Jacob Peterson"
-date: "`r Sys.Date()`"
-output: github_document
----
 
-## Setup
+
+
 ```{r setup, include=FALSE}
 #packages
 library(dplyr)
