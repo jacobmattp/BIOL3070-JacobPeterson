@@ -1,7 +1,9 @@
-Final report: COPD rates compared to average air quality throughout the year
-================
-Jacob Peterson
-10/8/2025
+---
+title: "Final report: COPD rates compared to average air quality throughout the year"
+author: "Jacob Peterson"
+date: "10/8/2025"
+output: github_document
+---
 
 - [ABSTRACT](#abstract)
 - [INTRO](#intro)
