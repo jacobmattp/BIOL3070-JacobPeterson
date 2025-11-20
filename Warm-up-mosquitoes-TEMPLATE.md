@@ -1,4 +1,5 @@
-Final report: COPD rates compared to average air quality throughout the year
+Final report: COPD rates compared to average air quality throughout the
+year
 ================
 Jacob Peterson
 10/8/2025
@@ -25,34 +26,392 @@ Jacob Peterson
 
 # ABSTRACT
 
-
 # Intro
 
-
-
 # BACKGROUND
-
-
 
 # STUDY QUESTION and HYPOTHESIS
 
 ## Questions
 
-
 ## Hypothesis
 
 ## Prediction
 
-
-
 # METHODS
 
+We began by downloading the data from
+<https://worldpopulationreview.com/state-rankings/air-quality-by-state>,
+and
+<https://www.lung.org/research/trends-in-lung-disease/copd-trends-brief/data-tables/copd-prevalence-rates-by-state-gender>
+AI was used throughout to either generate or enhance existing code,
+where AI generated all code is commented.
 
+`{r setup, include=FALSE} #packages library(dplyr) library(tidyr) library(stringr) library(ggplot2) library(viridis) library(maps)`
+\`\`\`{r include = FALSE}
+
+data_text \<- ” StatePercentCountPercentCountPercentCount Alabama 8.6
+161,900 10.1 207,500 9.4 369,400 Alaska 5.3 15,300 6.1 16,100 5.7 31,400
+Arizona 5.0 137,800 6.4 180,700 5.7 318,500 Arkansas 8.6 97,600 10.5
+125,600 9.6 223,200 California 4.5 680,600 4.7 733,100 4.6 1,413,800
+Colorado 4.3 98,900 5.9 135,100 5.1 233,900 Connecticut 4.7 65,400 5.9
+87,200 5.3 152,500 Delaware 5.9 22,400 6.6 27,300 6.2 49,700 District of
+Columbia 4.1 10,600 5.1 15,100 4.6 25,700 Florida (2020) 6.8 574,600 8.2
+745,500 7.5 1,320,100 Georgia 5.3 211,000 7.9 341,100 6.6 552,100 Hawaii
+3.4 19,300 3.6 20,800 3.5 40,200 Idaho 5.0 35,400 6.4 45,800 5.7 81,200
+Illinois 5.4 260,600 5.6 287,300 5.5 547,900 Indiana 7.4 188,300 9.5
+256,200 8.5 444,400 Iowa 6.0 72,500 7.1 89,000 6.6 161,600 Kansas 5.9
+64,400 7.0 79,300 6.4 143,700 Kentucky 9.8 166,800 12.0 214,900 10.9
+381,700 Louisiana 8.5 144,500 8.9 163,700 8.7 308,200 Maine 8.1 43,600
+9.8 56,200 9.0 99,900 Maryland 3.7 85,000 5.9 149,000 4.8 234,000
+Massachusetts 5.0 136,300 6.7 196,200 5.9 332,500 Michigan 6.8 261,800
+8.6 348,500 7.7 610,200 Minnesota 5.0 108,600 4.4 98,700 4.7 207,400
+Mississippi 7.6 82,500 10.4 122,400 9.1 204,900 Missouri 6.6 153,500
+10.4 255,600 8.5 409,000 Montana 5.2 22,800 6.6 28,400 5.9 51,200
+Nebraska 5.2 38,300 6.1 45,600 5.6 83,900 Nevada 5.7 69,200 8.0 98,600
+6.8 167,800 New Hampshire 4.7 165,200 6.3 235,000 5.5 400,100 New Jersey
+6.3 35,100 8.1 46,400 7.2 81,400 New Mexico 4.5 36,100 6.7 55,900 5.6
+91,900 New York 5.0 379,600 5.9 490,200 5.5 869,900 North Carolina 6.1
+241,000 9.0 386,500 7.6 627,500 North Dakota 4.4 13,500 5.3 15,600 4.8
+29,100 Ohio 7.6 340,300 9.5 452,900 8.6 793,200 Oklahoma 6.6 98,500 8.9
+136,800 7.8 235,300 Oregon 5.1 85,200 7.0 120,300 6.1 205,500
+Pennsylvania 6.9 344,000 6.8 361,300 6.8 705,300 Rhode Island 5.8 24,600
+5.7 26,000 5.7 50,600 South Carolina 6.7 130,600 8.3 177,200 7.5 307,800
+South Dakota 5.7 19,300 6.2 20,800 6.0 40,100 Tennessee 9.7 254,600 11.1
+311,100 10.4 565,700 Texas 5.2 570,900 6.8 771,100 6.0 1,342,000 Utah
+3.9 46,500 4.7 56,300 4.3 102,800 Vermont 5.8 15,000 7.3 19,700 6.6
+34,700 Virginia 5.4 179,600 7.3 254,500 6.4 434,100 Washington 4.7
+143,400 5.6 172,300 5.1 315,700 West Virginia 11.8 82,300 14.4 103,900
+13.1 186,200 Wisconsin 5.5 126,400 5.7 132,800 5.6 259,200 Wyoming 6.2
+14,100 6.9 15,100 6.5 29,200 United States 5.5 6,800,400 6.8 8,875,100
+6.2 15,587,000 ”
+
+    Fig 1 and 2
+    This formats our data so R can effectively read and format the state's data
+    First, we define our pattern and format the COPD data
+    Second, we create our data frame
+    ```{r}
+    # AI was used to generate this code chunk
+    lines <- str_split(data_text, "\n")[[1]]
+    lines <- trimws(lines)
+    lines <- lines[lines != ""]
+    lines <- lines[-1]
+
+    # 4. Define the pattern
+    pattern <- "^([A-Za-z .()0-9]+?)\\s+(\\d+\\.\\d)\\s+([\\d,]+)\\s+(\\d+\\.\\d)\\s+([\\d,]+)\\s+(\\d+\\.\\d)\\s+([\\d,]+)$"
+    rows <- str_match(lines, pattern)
+    rows <- rows[!is.na(rows[,1]), ]
+
+    # 7. Create the data frame
+    df <- as.data.frame(rows[,2:8])
+    colnames(df) <- c("State","Percent_Male","Count_Male","Percent_Female","Count_Female","Percent_Total","Count_Total")
+    df <- df %>%
+      # Filter out rows i don't want to plot
+      filter(State != "United States") %>%
+      filter(State != "District of Columbia") %>% # <-- NEW FIX: Remove D.C.
+      # Convert columns to the right type
+      mutate(across(starts_with("Percent"), as.numeric),
+             across(starts_with("Count"), ~ as.numeric(str_replace_all(.x, ",", ""))),
+             
+             State = str_replace(State, "\\s*\\(.*\\)", ""), # Removes (2020)
+             State = str_trim(State))                       # Removes whitespace
+
+Fig 3. Creation of the COPD gender maps and colors We first join the map
+data and create the color scale We then map the data \`\`\`{r} \# AI was
+used to troubleshoot and enhance code \# 1. map data states_map \<-
+map_data(“state”)
+
+# 2. heat map data to join
+
+heatmap_data \<- df %\>% select(State, Percent_Female, Percent_Male)
+%\>% pivot_longer(cols = starts_with(“Percent\_”), names_to = “Group”,
+values_to = “Percent”) %\>% mutate(Group = str_replace(Group,
+“Percent\_”, ““), region = tolower(State)) map_plot_data \<-
+left_join(states_map, heatmap_data, by =”region”, relationship =
+“many-to-many”)
+
+map_plot_data %\>% filter(!is.na(Group)) %\>% ggplot(aes(x = long, y =
+lat, group = group, fill = Percent)) +
+
+geom_polygon(color = “white”, linewidth = 0.1) +
+scale_fill_viridis_c(name = “Percent”) + facet_wrap(~ Group) +
+labs(title = “COPD Prevalence by U.S. State and Gender”) +
+theme_void() + coord_map() + theme( legend.position = “right”,
+plot.title = element_text(size = 18, face = “bold”, hjust = 0.5),
+strip.text = element_text(size = 14, face = “bold”)
+
+)
+
+
+    This code creates the difference between sexes map.
+    We first differentiate male and female.
+    Second we plot the difference.
+    Lastly the color scale is created and the map is printed.
+
+    ```{r}
+    # AI was used to troubleshoot and generate some code
+    states_map <- map_data("state") 
+    difference_data <- df %>%
+      mutate(
+        Percent_Difference = Percent_Female - Percent_Male,
+        region = tolower(State) # <-- This creates the join key
+      ) %>%
+      select(region, Percent_Difference)
+    map_diff_data <- left_join(states_map, difference_data, by = "region")
+    ggplot(map_diff_data, aes(x = long, y = lat, group = group, fill = Percent_Difference)) +
+      geom_polygon(color = "white", linewidth = 0.1) + # Draw the states
+      # 5. Use the DIVERGING color scale
+      scale_fill_gradient2(
+        name = "Percent Difference\n(Female - Male)",
+        low = "blue",      # States where males are higher (negative)
+        mid = "white",     # States where rates are equal (zero)
+        high = "red",      # States where females are higher (positive)
+        midpoint = 0       # We center the scale at zero
+      ) +
+      
+      labs(title = "Difference in COPD Prevalence (Female vs. Male)") +
+      theme_void() + # Use a clean theme
+      coord_map() +  # Use correct map projection
+      theme(
+        legend.position = "right",
+        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 9)
+      )
+
+# air quality index
+
+`{r include = FALSE} # more packages library(dplyr) library(tidyr) library(stringr) library(ggplot2) library(viridis) library(maps) library(readr)`
+
+\`\`\`{r include=FALSE} \# AI was not used for this chunk aq_df \<-
+read_csv(“air-quality-by-state-2025.csv”)
+
+print(“— Air Quality Data —”)
+
+    Fig 4.
+    This code chunk creates the overall AQI map.
+    We begin by reformatting the raw data.
+    Second we join the reformatted data to the mapping package.
+    Lastly we print the map
+
+    ```{r}
+    # AI was used to troubleshoot this chunk
+    states_map <- map_data("state")
+
+    aq_data_to_plot <- aq_df %>%
+      # Use the correct column names: `state` and `AirQuality_AirQualityIndexViaUSA_num_YearFree`
+      # We also rename the long AQI column to `Overall_AQI` to make it easier to use
+      select(State = state, Overall_AQI = `AirQuality_AirQualityIndexViaUSA_num_YearFree`) %>% 
+      mutate(region = tolower(State)) # <-- This creates the join key
+
+    map_plot_data <- left_join(states_map, aq_data_to_plot, by = "region")
+
+
+    map_plot_data <- map_plot_data %>%
+      filter(!is.na(Overall_AQI))
+
+    ggplot(map_plot_data, aes(x = long, y = lat, group = group, fill = Overall_AQI)) +
+      geom_polygon(color = "white", linewidth = 0.1) + # Draw the states
+      
+      scale_fill_viridis_c(name = "Overall AQI") +
+      
+      labs(title = "Overall Air Quality Index (AQI) by U.S. State (2025)") +
+      theme_void() + # Use a clean theme
+      coord_map() +  # Use correct map projection
+      theme(
+        legend.position = "right",
+        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 9)
+      )
+
+\`\`\` {r include = FALSE, eval = FALSE} \# this chunk was generated
+with AI \> ggplot(df, aes(x = sqrt(Percent_Total))) + +
+geom_histogram(binwidth = 0.1, fill = “skyblue”, color = “black”) + +
+labs( + title = “Normalized Distribution of COPD Prevalence”, + x =
+“Square Root of Overall COPD Rate”, + y = “Number of States” + ) + +
+theme_minimal() + + theme( + plot.title = element_text(size = 16, face =
+“bold”, hjust = 0.5) + ) \> \# We must use backticks for the column name
+\> aqi_column_name \<- “AirQuality_AirQualityIndexViaUSA_num_YearFree”
+\> \> \# Use mutate() to create the new transformed column \>
+aq_df_normalized \<- aq_df %\>% + mutate( + \# 1. Find the max value
+(k) + k = max(!!sym(aqi_column_name)) + 1, +  
++ \# 2. “Invert” (Reflect) and “SQRT” + \# The formula is sqrt(k - x) +
+AQI_Normalized = sqrt(k - !!sym(aqi_column_name)) + ) \> \> \# Now, plot
+the new normalized column \> ggplot(aq_df_normalized, aes(x =
+AQI_Normalized)) + + geom_histogram(binwidth = 0.1, fill = “lightgreen”,
+color = “black”) + + labs( + title = “Normalized Distribution of AQI
+(Reflected + SQRT)”, + x = “Square Root of (Max AQI - AQI)”, + y =
+“Number of States” + ) + + theme_minimal() + + theme( + plot.title =
+element_text(size = 16, face = “bold”, hjust = 0.5) + )
+
+## combine the data
+
+
+    This code normalizes and reformats our data. 
+    We begin by loading needed libraries.
+    Then we load in our data and format to recombine them.
+    Lastly, we normalize our data using the SQRT method.
+    Normalization is required in this instance because our data does not follow a normal distribution. We chose the SQRT method because our data was right-skewed, a normalcy test was not required in this instance because the data is clearly right-skewed. 
+    ```{r}
+    # AI was used to troubleshoot and generate some code in this chunk
+    library(readr)
+    library(dplyr)
+    library(tidyr) # For pivoting later
+    library(ggplot2) # For the scatter plot
+
+    # 2. Reload two data frames 
+    aq_df <- read_csv("air-quality-by-state-2025.csv")
+
+    # 3. Join the two data frames by state
+    # We need to make sure the state names match.
+    # 'df' has "State" (e.g., "Alabama")
+    # 'aq_df' has "state" (e.g., "Alabama")
+
+    combined_df <- inner_join(df, aq_df, by = c("State" = "state"))
+
+
+    aqi_column_name <- "AirQuality_AirQualityIndexViaUSA_num_YearFree"
+    # AI generated the below code of this chunk
+    combined_df <- combined_df %>%
+      mutate(
+        # A. Normalize COPD rates (Square Root)
+        Percent_Total_Norm = sqrt(Percent_Total),
+        Percent_Male_Norm = sqrt(Percent_Male),
+        Percent_Female_Norm = sqrt(Percent_Female),
+        
+        # B. Normalize AQI (Reflect + Square Root)
+        k = max(!!sym(aqi_column_name)) + 1,
+        AQI_Normalized = sqrt(k - !!sym(aqi_column_name))
+      )
+
+This code plots our SQRT and SQRT reflected data. We first create the
+histogram and colors. Second we create the axes
+
+\`\``{r} ggplot(df, aes(x = Percent_Total)) +   geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +   labs(     title = "Distribution of Overall COPD Prevalence by State",     x = "Overall COPD Rate (%)",     y = "Number of States"   ) +   theme_minimal() +   theme(     plot.title = element_text(size = 16, face = "bold", hjust = 0.5)   ) ggplot(aq_df, aes(x =`AirQuality_AirQualityIndexViaUSA_num_YearFree\`)) +
+\# AQI values are clustered, so a smaller binwidth is better
+geom_histogram(binwidth = 2, fill = “lightgreen”, color = “black”) +
+labs( title = “Distribution of Overall AQI by State (2025)”, \# We can
+set a cleaner label for the x-axis x = “Overall Air Quality Index
+(AQI)”, y = “Number of States” ) + theme_minimal() + theme( plot.title =
+element_text(size = 16, face = “bold”, hjust = 0.5) )
+
+
+    ## Pearson test and GLM
+    ```{r include = FALSE, eval = FALSE}
+    # AI generated this code chunk
+    # This code block is for testing data normalization.
+    # It is currently not being run (eval = FALSE).
+
+    # 1. Plot histogram for normalized COPD data
+    ggplot(df, aes(x = sqrt(Percent_Total))) +
+         geom_histogram(binwidth = 0.1, fill = "skyblue", color = "black") +
+         labs(
+             title = "Normalized Distribution of COPD Prevalence",
+             x = "Square Root of Overall COPD Rate",
+             y = "Number of States"
+         ) +
+         theme_minimal() +
+         theme(
+             plot.title = element_text(size = 16, face = "bold", hjust = 0.5)
+         )
+
+    # 2. Normalize the AQI data
+    # We must use backticks for the column name
+    aqi_column_name <- "AirQuality_AirQualityIndexViaUSA_num_YearFree"
+
+    # Use mutate() to create the new transformed column
+    aq_df_normalized <- aq_df %>%
+         mutate(
+             # 1. Find the max value (k)
+             k = max(!!sym(aqi_column_name)) + 1,
+             
+             # 2. "Invert" (Reflect) and "SQRT"
+             # The formula is sqrt(k - x)
+             AQI_Normalized = sqrt(k - !!sym(aqi_column_name))
+         )
+
+    # 3. Plot the new normalized AQI column
+    ggplot(aq_df_normalized, aes(x = AQI_Normalized)) +
+         geom_histogram(binwidth = 0.1, fill = "lightgreen", color = "black") + 
+         labs(
+             title = "Normalized Distribution of AQI (Reflected + SQRT)",
+             x = "Square Root of (Max AQI - AQI)",
+             y = "Number of States"
+         ) +
+         theme_minimal() +
+         theme(
+             plot.title = element_text(size = 16, face = "bold", hjust = 0.5)
+         )
+
+This code runs our combined data through a pearson correlation test, and
+a GLM model validate our data significance
+
+\`\`\`{r} \# AI was used to troubleshoot this chunk \# Run a Pearson’s
+Correlation Test total_corr_test \<-
+cor.test(combined_df$AQI_Normalized, combined_df$Percent_Total_Norm)
+
+print(total_corr_test)
+
+# Run the Simple Linear Regression (lm)
+
+total_lm_model \<- lm(Percent_Total_Norm ~ AQI_Normalized, data =
+combined_df)
+
+print(summary(total_lm_model))
+
+
+    This code runs the same code as above between sexes
+
+    ```{r}
+    # AI was used to troubleshoot this chunk
+    # Correlation for MALES
+    male_corr_test <- cor.test(combined_df$AQI_Normalized, combined_df$Percent_Male_Norm)
+    print(male_corr_test)
+
+    # Correlation for FEMALES
+    female_corr_test <- cor.test(combined_df$AQI_Normalized, combined_df$Percent_Female_Norm)
+    print(female_corr_test)
+
+This code runs a GLM model against each sex to determine if there is
+statistical significance between sexes
+
+\`\`\`{r} \# AI was used to troubleshoot this chunk and generate some
+code long_df \<- combined_df %\>% select(State, AQI_Normalized,
+Percent_Male_Norm, Percent_Female_Norm) %\>% pivot_longer( cols =
+c(“Percent_Male_Norm”, “Percent_Female_Norm”), names_to = “Gender”,
+values_to = “COPD_Norm” ) %\>% mutate(Gender = str_replace(Gender,
+“Percent\_”, ““)) %\>% mutate(Gender = str_replace(Gender,”\_Norm”, ““))
+gender_interaction_model \<- lm(COPD_Norm ~ AQI_Normalized \* Gender,
+data = long_df)
+
+summary(gender_interaction_model)
+
+
+    This code generates the final trendline and graph of the normalized data. 
+
+    ```{r}
+
+    #This code was generated with AI
+
+    ggplot(combined_df, aes(x = AQI_Normalized, y = Percent_Total_Norm)) +
+      geom_point(color = "black", alpha = 0.6, size = 2.5) +
+      
+      # Add the regression line
+      geom_smooth(method = "lm", color = "darkblue", fill = "lightblue") +
+      
+      labs(
+        title = "Overall Relationship: Air Quality vs. COPD Rates",
+        x = "Normalized AQI Score \n(← Worse Air Quality | Better Air Quality →)",
+        y = "Normalized Total COPD Rate"
+      ) +
+      
+      theme_classic(base_size = 15) +
+      theme(
+        plot.title = element_text(face = "bold", hjust = 0.5),
+        axis.text = element_text(color = "black")
+      )
 
 # DISCUSSION
 
-
-
 # CONCLUSION
-
-
